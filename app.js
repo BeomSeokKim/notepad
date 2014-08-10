@@ -9,6 +9,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var mongoose = require('mongoose');
 
 var app = express();
 
@@ -24,16 +25,25 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.bodyParser());
+
 
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+app.post('/save', routes.insert);
 
 app.get('/', routes.index);
+app.get('/save', routes.save)
+app.get('/list', routes.list);
+app.get('/memo', routes.memo);
 app.get('/users', user.list);
-app.get('/', routes.index);
+
+
+
+
 
 
 http.createServer(app).listen(app.get('port'), function(){
