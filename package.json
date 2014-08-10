@@ -6,7 +6,8 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.4.4",
-    "jade": "*"
+    "ejs": "*",
+    "ejs-locals": "^1.0.2",
+    "express": "3.4.4"
   }
 }
