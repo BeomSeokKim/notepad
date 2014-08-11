@@ -1,17 +1,42 @@
 <% 
 	layout('layout.ejs') 
 -%>
-
+<script>
+$(document).ready(function(){
+	$('#btnList').click(function(){
+		$('.col-md-3').addClass('col-md-12');
+		$('.col-md-3').removeClass('col-md-3');
+	});
+	$('#btnGrid').click(function(){
+		$('.col-md-12').addClass('col-md-3');
+		$('.col-md-12').removeClass('col-md-12');
+	});
+	$('.btnModify').click(function(){
+		location.href = '/save?memono=' + $(this).parents('.caption').attr('memono');
+	});
+});
+</script>
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron"> 
+<div class="jumbotron" style='padding: 10px; margin-bottom: 15px;'> 
 </div>
-
-<div class="container">
-
-<script language="JavaScript"> 
-		var array = '<%=obj%>'
-			alert(array)
-		
-	</script>
-
+<div class='container'>
+<button class='btn btn-success btn-sm' id='btnList' style='margin-bottom: 20px;'>list</button>
+<button class='btn btn-success btn-sm' id='btnGrid' style='margin-bottom: 20px;'>grid</button>
+<% for(var i = 0 ; i < obj.length ; i++) {%>
+	<% if( i % 4 === 0 ) { %>
+	<div class='row'>
+	<%}%>
+	<div class="col-md-3" style='margin-bottom: 20px;'>
+		<div class="thumbnail">
+			<div class="caption" memono='<%-obj[i].title%>'>
+				<h3><%-obj[i].title%></h3>
+				<p><%-obj[i].memo%></p>
+				<p><a href="#" class="btn btn-primary btnModify">수정</a> <a href="#" class="btn btn-default btnDelete">삭제</a></p>
+			</div>
+		</div>
+	</div>
+	<% if( i % 4 === 3 ) { %>
+	</div>
+	<%}%>
+<%}%>
 </div>

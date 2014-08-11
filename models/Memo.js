@@ -4,5 +4,6 @@ var mongoose = require('mongoose')
 //mongoDB schema
 exports.MemoSchema = {
 	title: String,
-	memo: String
+	memo: String,
+	trnsmis_date : Date
 };
